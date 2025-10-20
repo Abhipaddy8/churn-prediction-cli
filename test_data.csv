@@ -1,0 +1,6 @@
+customer-id,logins,support-tickets,last_activity,active_member,total_value,monthly_charges,term
+CUST-001,1,5,40,0,100,10,1
+CUST-002,50,0,2,1,5000,200,24
+CUST-003,10,2,15,1,1500,50,12
+CUST-004,2,8,35,0,500,30,6
+CUST-005,25,1,5,1,3000,100,24

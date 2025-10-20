@@ -1,0 +1,37 @@
+{
+  "name": "churn-prediction-cli",
+  "version": "1.0.0",
+  "description": "A professional CLI tool for customer churn prediction using machine learning",
+  "main": "cli.js",
+  "bin": {
+    "churn-predict": "./cli.js"
+  },
+  "scripts": {
+    "start": "node cli.js",
+    "test": "node cli.js --help",
+    "demo": "node cli.js test_data.csv --verbose",
+    "install-global": "npm install -g ."
+  },
+  "keywords": [
+    "churn",
+    "prediction",
+    "machine-learning",
+    "cli",
+    "customer-analytics",
+    "data-science"
+  ],
+  "author": "Your Organization",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/churn-prediction-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/churn-prediction-cli/issues"
+  },
+  "homepage": "https://github.com/your-org/churn-prediction-cli#readme",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "preferGlobal": true
+}
