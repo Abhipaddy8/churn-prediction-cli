@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node.js-%3E%3D12.0.0-brightgreen.svg)](https://nodejs.org/)
 
-A professional command-line tool for customer churn prediction using machine learning. Analyze your customer data to identify high-risk customers and take proactive retention measures.
+This is a churn prediction CLI tool I built in 3 hours. Currently, the pipeline.py creates synthetic churn labels using a weighted formula (support tickets: 0.4, logins: -0.3, activity: -0.2), then trains a LogisticRegression model on those synthetic labels. It's essentially a rule-based scoring system, not true machine learning with historical churn data.
 
 ## 🚀 Features
 
