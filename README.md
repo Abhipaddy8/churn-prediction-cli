@@ -4,17 +4,42 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node.js-%3E%3D12.0.0-brightgreen.svg)](https://nodejs.org/)
 
-A professional command-line tool for customer churn prediction using machine learning. Analyze your customer data to identify high-risk customers and take proactive retention measures.
+A professional command-line tool for customer churn risk assessment using a behavioral risk scoring system. Analyze your customer data to identify high-risk customers and take proactive retention measures.
 
 ## 🚀 Features
 
 - **Flexible Input**: Process single or multiple CSV files
 - **Smart Column Mapping**: Automatically detects relevant columns in your data
-- **Machine Learning Pipeline**: Uses logistic regression for churn prediction
+- **Behavioral Risk Scoring**: Scores churn risk using weighted behavioral signals
 - **Professional UX**: Beautiful progress indicators, colored output, and helpful error messages
 - **Multiple Output Formats**: CSV, JSON, and HTML report generation
 - **Interactive & Non-Interactive Modes**: Use via command line or interactive prompts
 - **Comprehensive Help System**: Built-in help and usage examples
+
+## 🧠 Methodology (Transparent Overview)
+
+This tool currently implements a rule-based, behavioral risk scoring approach rather than a fully supervised machine learning model trained on historical churn labels.
+
+- **Signals used**: support tickets, logins/sessions, and recent activity
+- **Weighted formula**: tickets (0.4), logins (-0.3), activity (-0.2)
+- **Synthetic labels for calibration**: The pipeline generates synthetic churn labels from the weighted score and then fits a logistic regression to translate the score into probabilities. This calibration step does not constitute training on real historical churn outcomes.
+- **Output**: A probability-like score and a high-risk flag (RED LIGHT) for prioritization
+
+This design delivers an immediately useful prioritization signal when you lack reliable historical churn labels.
+
+## ⚠️ Disclaimer (v1 Status)
+
+- This is a v1, rule-based system that does not train on real historical churn outcomes.
+- We are transparent by design: the weights are configurable and visible in code, and the logistic regression is used purely for probability calibration on synthetic labels.
+- Results should be treated as an actionable screening tool, not a statistically validated churn predictor.
+
+## 💡 Why It's Still Useful
+
+Even without historical labels, the behavioral score surfaces customers who exhibit patterns commonly associated with churn (e.g., rising ticket volume, falling engagement). This enables:
+
+- **Proactive retention**: Triage accounts for outreach before churn happens
+- **CS ops prioritization**: Focus limited resources on likely-at-risk accounts
+- **Early signal**: Provide guidance while you gather and label real churn outcomes
 
 ## 📦 Installation
 
@@ -37,32 +62,36 @@ pip install -r requirements.txt
 npm install -g .
 ```
 
+After global installation, you can use the `churn-predict` command from anywhere.
+
 #### Local Installation
 ```bash
 npm install
 ```
 
+For local installation, use `node cli.js` instead of `churn-predict`.
+
 ## 🎯 Quick Start
 
 ### Interactive Mode
 ```bash
-npm start
+churn-predict
 # Follow the prompts to add your CSV files
 ```
 
 ### Command Line Mode
 ```bash
 # Single file
-npm start data.csv
+churn-predict data.csv
 
 # Multiple files
-npm start data1.csv data2.csv data3.csv
+churn-predict data1.csv data2.csv data3.csv
 
 # Custom output
-npm start -o results.csv data.csv
+churn-predict -o results.csv data.csv
 
 # Verbose output
-npm start --verbose data.csv
+churn-predict --verbose data.csv
 ```
 
 ## 📊 Required Data Format
@@ -92,7 +121,7 @@ C003,67,1,2,2200,Premium
 ### Command Line Options
 
 ```bash
-npm start [options] [files...]
+churn-predict [options] [files...]
 ```
 
 | Option | Description |
@@ -108,19 +137,19 @@ npm start [options] [files...]
 
 ```bash
 # Basic usage
-npm start customer_data.csv
+churn-predict customer_data.csv
 
 # Multiple files with custom output
-npm start -o high_risk_customers.csv data1.csv data2.csv
+churn-predict -o high_risk_customers.csv data1.csv data2.csv
 
 # JSON output for API integration
-npm start -f json data.csv
+churn-predict -f json data.csv
 
 # Verbose mode for debugging
-npm start --verbose data.csv
+churn-predict --verbose data.csv
 
 # Interactive mode
-npm start
+churn-predict
 ```
 
 ## 📈 Output
@@ -139,6 +168,20 @@ C002,0.994,RED LIGHT
 C003,0.899,RED LIGHT
 C006,0.969,RED LIGHT
 ```
+
+## 🗺️ Roadmap to Full ML
+
+We plan to evolve from rule-based scoring to a fully supervised ML pipeline trained on historical churn outcomes:
+
+1. **Data schema + feature store**: Standardize inputs; persist versioned features
+2. **Label ingestion**: Integrate ground-truth churn (cancellations, downgrades, inactivity)
+3. **Modeling**: Train and compare calibrated models (logistic regression, gradient boosting, XGBoost, calibrated neural nets)
+4. **Evaluation**: Offline validation with temporal splits; business-aligned metrics (recall@k, precision@k, uplift)
+5. **Thresholding & policies**: Optimize intervention policies under resource constraints
+6. **MLOps**: CI for data/feature tests, model registry, monitored batch scoring with drift detection
+7. **Explainability**: Shapley-based attribution and human-readable reasons-for-flag
+
+Until then, the v1 behavioral scoring provides immediate value for prioritizing retention efforts.
 
 ## 🔧 Configuration
 
@@ -162,19 +205,19 @@ Create a `config.json` file to customize behavior:
 }
 ```
 
-Use with: `npm start --config config.json data.csv`
+Use with: `churn-predict --config config.json data.csv`
 
 ## 🧪 Testing
 
 ```bash
 # Test help system
-npm test
+churn-predict --help
 
 # Run demo with sample data
-npm run demo
+churn-predict examples/sample_data.csv --verbose
 
 # Test with your own data
-npm start your_data.csv --verbose
+churn-predict your_data.csv --verbose
 ```
 
 ## 📁 Project Structure
@@ -182,17 +225,17 @@ npm start your_data.csv --verbose
 ```
 churn-prediction-cli/
 ├── cli.js                 # Main CLI application
-├── mapper.py              # Column mapping logic
-├── pipeline.py            # ML pipeline
+├── mapper.py              # Column mapping logic (auto-detects columns)
+├── pipeline.py            # Behavioral risk scoring + calibration (v1)
 ├── package.json           # Node.js configuration
 ├── requirements.txt       # Python dependencies
-├── README.md             # This file
-├── LICENSE               # MIT License
-├── .gitignore            # Git ignore rules
-├── examples/             # Sample data files
+├── README.md              # This file
+├── LICENSE                # MIT License
+├── .gitignore             # Git ignore rules
+├── examples/              # Sample data files
 │   ├── sample_data.csv
 │   └── multi_file_example/
-└── docs/                 # Additional documentation
+└── docs/                  # Additional documentation
     ├── API.md
     └── TROUBLESHOOTING.md
 ```
