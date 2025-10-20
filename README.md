@@ -1,6 +1,6 @@
 # Churn Prediction CLI
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/your-org/churn-prediction-cli)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/equipp/churn-prediction-cli)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node.js-%3E%3D12.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -212,14 +212,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 - **Documentation**: Check the [docs/](docs/) folder
-- **Issues**: [GitHub Issues](https://github.com/your-org/churn-prediction-cli/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/churn-prediction-cli/discussions)
-
-## 🙏 Acknowledgments
-
-- Built with Node.js and Python
-- Uses scikit-learn for machine learning
-- Inspired by modern CLI design principles
+- **Issues**: [GitHub Issues](https://github.com/equipp/churn-prediction-cli/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/equipp/churn-prediction-cli/discussions)
 
 ---
 

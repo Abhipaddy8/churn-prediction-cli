@@ -24,12 +24,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/churn-prediction-cli.git"
+    "url": "https://github.com/equipp/churn-prediction-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/your-org/churn-prediction-cli/issues"
+    "url": "https://github.com/equipp/churn-prediction-cli/issues"
   },
-  "homepage": "https://github.com/your-org/churn-prediction-cli#readme",
+  "homepage": "https://github.com/equipp/churn-prediction-cli#readme",
   "engines": {
     "node": ">=12.0.0"
   },

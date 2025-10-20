@@ -87,4 +87,4 @@ None in this initial release.
 
 ---
 
-For more information about changes, see the [GitHub Releases](https://github.com/your-org/churn-prediction-cli/releases) page.
+For more information about changes, see the [GitHub Releases](https://github.com/equipp/churn-prediction-cli/releases) page.
